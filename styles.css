@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-paper text-dark font-body antialiased selection:bg-primary selection:text-white;
+    /* Subtle grid texture */
+    background-image: linear-gradient(#e5e5e5 1px, transparent 1px), linear-gradient(90deg, #e5e5e5 1px, transparent 1px);
+    background-size: 16px 16px;
+  }
+}
+
+@layer components {
+  .brutal-card {
+    @apply bg-white border-4 border-dark shadow-brutal rounded-none;
+  }
+  
+  .brutal-badge {
+    @apply px-4 py-2 border-4 border-dark shadow-brutal font-mono font-bold uppercase rounded-none;
+  }
+
+  .brutal-btn {
+    @apply px-6 py-3 border-4 border-dark shadow-brutal font-display font-medium rounded-none transition-transform duration-100 ease-linear cursor-crosshair inline-flex items-center justify-center;
+  }
+  .brutal-btn:hover {
+    @apply -translate-x-[2px] -translate-y-[2px];
+    box-shadow: 8px 8px 0px 0px #1A1A1A;
+  }
+  .brutal-btn:active {
+    @apply translate-x-[2px] translate-y-[2px];
+    box-shadow: 2px 2px 0px 0px #1A1A1A;
+  }
+
+  .reveal-on-scroll {
+    @apply opacity-0 translate-y-8 transition-all duration-[100ms] ease-linear;
+  }
+  .reveal-on-scroll.revealed {
+    @apply opacity-100 translate-y-0;
+  }
+  
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-on-scroll {
+      @apply opacity-100 translate-y-0 transition-none;
+    }
+    .animate-ticker {
+      animation-duration: 0s !important;
+    }
+  }
+}
+
+.ticker-container {
+  display: flex;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
+}
+.ticker-container:hover .animate-ticker {
+  animation-play-state: paused;
+}
+.ticker-content {
+  display: flex;
+  flex-shrink: 0;
+  min-width: 100%;
+}
